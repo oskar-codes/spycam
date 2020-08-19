@@ -16,10 +16,10 @@
         <input type="text" placeholder="Enter camera code" onchange="startDash(this.value);">
       </div>
       <div v-if="status === 'cam'">
-        Camera is running! Your code is: <br><pre><b>{{code}}</b></pre>
+        Camera is running! Your code is: <pre><b>{{code}}</b></pre>
       </div>
       <div v-if="status === 'dash'">
-        Viewing camera with code <pre><b>{{code}}</b></pre>.<br>
+        Viewing camera with code: <pre><b>{{code}}</b></pre><br>
         <video src=""></video>
       </div>
     </div>
