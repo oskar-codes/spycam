@@ -42,36 +42,36 @@ function gotMedia (stream) {
 
 function startDash(code) {
   firebase.database().ref(code).once('value', (snap) => {
-    app.status = "dash";
-    app.code = code;
-    console.log(snap.val());
+    if (snap.val()) {
+      app.status = "dash";
+      app.code = code;
+      console.log(snap.val());
 
-    let peer = new SimplePeer();
-  
-    if (snap.val()?.origin) peer.signal(snap.val().origin)
+      let peer = new SimplePeer();
+    
+      if (snap.val()?.origin) peer.signal(snap.val().origin)
 
-    peer.on('signal', data => {
-      firebase.database().ref(code + "/return").set(JSON.stringify(data));
-    });
-  
-    peer.on('stream', stream => {
-      var video = document.querySelector('video')
-  
-      if ('srcObject' in video) {
-        video.srcObject = stream
-      } else {
-        video.src = window.URL.createObjectURL(stream);
-      }
-  
-      video.play();
-    });
+      peer.on('signal', data => {
+        firebase.database().ref(code + "/return").set(JSON.stringify(data));
+      });
+    
+      peer.on('stream', stream => {
+        var video = document.querySelector('video')
+    
+        if ('srcObject' in video) {
+          video.srcObject = stream
+        } else {
+          video.src = window.URL.createObjectURL(stream);
+        }
+    
+        video.play();
+      });
 
-    peer.on('connect', () => {
-      console.log("CONNECTED");
-    });
-  }).catch((e) => {
-    console.error(e);
-    alert('Invalid Camera Code.');
+      peer.on('connect', () => {
+        console.log("CONNECTED");
+      });
+    } else {
+      alert('Invalid Camera Code.');
+    }
   });
-
 }
