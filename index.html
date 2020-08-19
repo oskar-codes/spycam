@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpyCam</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    
+    <div id="app">
+      <h1>SpyCam</h1>
+      <div v-if="!status">
+        <button onclick="startCam();">Set this device as camera</button>
+        Or
+        <input type="text" placeholder="Enter camera code" onchange="startDash(this.value);">
+      </div>
+      <div v-if="status === 'cam'">
+        Camera is running! Your code is: <br><b>{{code}}</b>
+      </div>
+      <div v-if="status === 'dash'">
+        Viewing camera with code <b>{{code}}</b>.<br>
+        <video src=""></video>
+      </div>
+    </div>
+
+    <script src="simplepeer.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-database.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyAHtIRmeGsvwK079cMBhTJfTUKIyjVQylI", authDomain: "spycam-website.firebaseapp.com", databaseURL: "https://spycam-website.firebaseio.com", projectId: "spycam-website", storageBucket: "spycam-website.appspot.com", messagingSenderId: "353430537357", appId: "1:353430537357:web:81f724e16094733405cec4"
+      };
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

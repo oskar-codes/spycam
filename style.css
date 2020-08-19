@@ -1,0 +1,31 @@
+body {
+  font-family: sans-serif;
+  background-color: black;
+  color: white;
+  margin: 0;
+}
+
+#app {
+  text-align: center;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+button {
+  cursor: pointer;
+}
+
+button, input {
+  background-color: white;
+  border: none;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+video {
+  background-color: #111;
+  margin: 10px;
+}
