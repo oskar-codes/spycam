@@ -8,8 +8,7 @@ let app = new Vue({
 
 function startCam() {
   navigator.mediaDevices.getUserMedia({
-    video: true,
-    audio: true
+    video: true
   }).then(gotMedia).catch(alert)
 }
 
