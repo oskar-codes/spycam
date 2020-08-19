@@ -17,7 +17,7 @@ function gotMedia (stream) {
   let peer = new SimplePeer({ initiator: true, stream: stream });
   let firstSignal = true;
   
-  peer.on('error', console.error);
+  peer.on('error', alert);
 
   peer.on('signal', data => {
     if (firstSignal) {
@@ -57,7 +57,7 @@ function startDash(code) {
     
       peer.on('stream', stream => {
         var video = document.querySelector('video')
-    
+
         if ('srcObject' in video) {
           video.srcObject = stream
         } else {
@@ -70,6 +70,8 @@ function startDash(code) {
       peer.on('connect', () => {
         console.log("CONNECTED");
       });
+
+      peer.on('error', alert);
     } else {
       alert('Invalid Camera Code.');
     }
