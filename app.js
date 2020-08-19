@@ -24,7 +24,7 @@ function gotMedia (stream) {
       firstSignal = false;
       let ref = firebase.database().ref('/').push();
       ref.set({
-        origin: data
+        origin: JSON.stringify(data)
       }).then(() => {
         app.code = ref.key;
         app.status = "cam";
@@ -41,11 +41,9 @@ function gotMedia (stream) {
 }
 
 function startDash(code) {
-  app.status = "dash";
-  app.code = code;
-
   firebase.database().ref(code).once('value', (snap) => {
-
+    app.status = "dash";
+    app.code = code;
     console.log(snap.val());
 
     let peer = new SimplePeer();
@@ -57,13 +55,12 @@ function startDash(code) {
     });
   
     peer.on('stream', stream => {
-      // got remote video stream, now let's show it in a video tag
       var video = document.querySelector('video')
   
       if ('srcObject' in video) {
         video.srcObject = stream
       } else {
-        video.src = window.URL.createObjectURL(stream) // for older browsers
+        video.src = window.URL.createObjectURL(stream);
       }
   
       video.play();
@@ -72,6 +69,9 @@ function startDash(code) {
     peer.on('connect', () => {
       console.log("CONNECTED");
     });
+  }).catch((e) => {
+    console.error(e);
+    alert('Invalid Camera Code.');
   });
 
 }
