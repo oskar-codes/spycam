@@ -49,7 +49,7 @@ function startDash(code) {
 
       let peer = new SimplePeer();
     
-      if (snap.val()?.origin) peer.signal(snap.val().origin)
+      peer.signal(snap.val().origin)
 
       peer.on('signal', data => {
         firebase.database().ref(code + "/return").set(JSON.stringify(data));
