@@ -10,7 +10,7 @@ function startCam() {
   navigator.mediaDevices.getUserMedia({
     video: true,
     audio: true
-  }).then(gotMedia).catch(console.error)
+  }).then(gotMedia).catch(alert)
 }
 
 function gotMedia (stream) {
