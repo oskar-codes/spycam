@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spycam</title>
+    <title>SpyCam</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
@@ -16,10 +16,10 @@
         <input type="text" placeholder="Enter camera code" onchange="startDash(this.value);">
       </div>
       <div v-if="status === 'cam'">
-        Camera is running! Your code is: <br><b>{{code}}</b>
+        Camera is running! Your code is: <br><pre><b>{{code}}</b></pre>
       </div>
       <div v-if="status === 'dash'">
-        Viewing camera with code <b>{{code}}</b>.<br>
+        Viewing camera with code <pre><b>{{code}}</b></pre>.<br>
         <video src=""></video>
       </div>
     </div>
